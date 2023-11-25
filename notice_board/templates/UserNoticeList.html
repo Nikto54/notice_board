@@ -1,0 +1,29 @@
+{% extends 'index.html' %}
+
+{% block content %}
+    <h1>Объявления авторизованного пользователя</h1>
+    {% for item in response_data %}
+        <div class="notice">
+            <h2>{{ item.notice.title }}</h2>
+            <div>
+                {% for response in item.responses %}
+                    <div class="response">
+                        <p>{{ response.text }}</p>
+                        <p>От: {{ response.article }}</p>
+                        <form method="post" action="{% url 'response_accept' response.id %}">
+                            {% csrf_token %}
+                            <button type="submit" name="action" value="accept">Принять</button>
+                        </form>
+                        <form method="post" action="{% url 'response_reject' response.id %}">
+                            {% csrf_token %}
+                            <button type="submit" name="action" value="reject">Отклонить</button>
+                        </form>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    {% empty %}
+        <p>Вы еще не создали никаких объявлений.</p>
+    {% endfor %}
+{% endblock %}
+

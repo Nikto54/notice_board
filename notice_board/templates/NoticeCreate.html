@@ -1,0 +1,29 @@
+{% extends 'index.html'%}
+<!DOCTYPE html>
+<html>
+<head>
+    {% load static %}
+    <link href="{% static 'css/styles.css' %}" rel="stylesheet" />
+</head>
+<body>
+    <div class="container">
+
+{% block title %}
+    Создание объявления
+{% endblock title %}
+
+{% block content %}
+    <div class="container">
+        <form method="post" action="{% url 'mmorpg:ResponseCreate' %}">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <input type="submit" value="Save">
+        </form>
+    </div>
+{% endblock content %}
+
+
+
+    </div>
+</body>
+</html>

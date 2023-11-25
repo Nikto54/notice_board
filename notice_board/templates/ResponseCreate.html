@@ -1,0 +1,22 @@
+{% extends 'index.html'%}
+<!DOCTYPE html>
+<html>
+<head>
+    {% load static %}
+    <link href="{% static 'css/styles.css' %}" rel="stylesheet" />
+</head>
+<body>
+    <div class="container">
+        {% block title %}
+        {% endblock title %}
+
+        {% block content %}
+            <form method="post" action="{% url 'ResponseCreate' notice_pk=notice.pk%}">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <input type="submit" value="Save">
+            </form>
+        {% endblock content %}
+    </div>
+</body>
+</html>

@@ -1,0 +1,39 @@
+{% extends 'index.html'%}
+<!DOCTYPE html>
+<html>
+<head>
+    {% load static %}
+    <link href="{% static 'css/styles.css' %}" rel="stylesheet" />
+</head>
+<body>
+    <div class="container">
+        {% block title %}
+
+{% endblock title %}
+
+{% block content %}
+{% if notices %}
+        <h1>Все объявления</h1>
+        <table class="table-with-padding">
+    <tr>
+        <th>Заголовок</th>
+        <th>Автор</th>
+        <th>Категория</th>
+    </tr>
+    {% for notice in notices %}
+        <tr>
+            <td>{{notice.title}}</td>
+            <td>{{notice.author}}</td>
+            <td>{{notice.category}}</td>
+            <td><a href="{% url 'mmorpg:NoticeDetail' pk=notice.pk %}">Перейти к посту</a></td>
+        </tr>
+    {% endfor %}
+</table>
+
+    {% else %}
+        <h1>Нет объявлений</h1>
+    {% endif %}
+{% endblock content %}
+    </div>
+</body>
+</html>
